@@ -1,5 +1,4 @@
 import random
-import time
 
 def mergeSort(array):
     if len(array) <= 1:
@@ -21,8 +20,6 @@ def merge(arrayA, arrayB):
             result.append(arrayB[j])
             j = j + 1
     return result
-
-
 
 def test():
     numNumbers = 100000
