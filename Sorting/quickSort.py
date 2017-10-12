@@ -1,4 +1,6 @@
-"Quicksort: sort in place, return nothing"
+import random
+
+# Quicksort: sort in place, return nothing
 def quickSort_inPlace(array, low = None, high = None):
     low = 0 if low is None else low
     high = len(array) if high is None else high
@@ -14,7 +16,7 @@ def quickSort_inPlace(array, low = None, high = None):
         quickSort_inPlace(array, low, i)
         quickSort_inPlace(array, i+1, high)
 
-"Quicksort: return the sorted array"
+# Quicksort: return the sorted array
 def quickSort_return(array):
     if len(array) <= 1:
         return array
@@ -23,3 +25,14 @@ def quickSort_return(array):
         left = quickSort_return([x for x in array if x < pivot[0]])
         right = quickSort_return([x for x in array if x > pivot[0]])
         return left + pivot + right
+
+def test():
+    numNumbers = 100000
+    maxNumber = 100000
+    array = [random.randint(1, maxNumber) for _ in range(numNumbers)]
+    answer = sorted(array)
+    assert answer == quickSort_return(array)
+    quickSort_inPlace(array)
+    assert answer == array
+
+test()
