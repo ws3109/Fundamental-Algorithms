@@ -29,18 +29,15 @@ def generateGraph(n, threshold = 0.3, low = 10, high = 1000):
 
 def bellmanFord(graph, initial):
     INF = float('inf')
-    dist, path = {}, {}
+    dist = {}
     for node in graph.nodes:
         dist[node] = INF if node != initial else 0
-        path[node] = [] if node != initial else [node]
 
     # n - 1 times of upates
     for i in range(len(graph.nodes) - 1):
         for node in graph.nodes:
             for neighbor in graph.edges[node]:
-                new_dist =  dist[node] + graph.distances[(node, neighbor)]
-                if new_dist < dist[neighbor]:
-                    dist[neighbor], path[neighbor] = new_dist, path[node] + [neighbor]
+                dist[neighbor] = min(dist[neighbor], dist[node] + graph.distances[(node, neighbor)])
 
     # Check for negative-weight cycles
     for u in graph.nodes:
